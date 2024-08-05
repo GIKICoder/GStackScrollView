@@ -151,4 +151,3 @@ self.feedListVc.view.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.
 
 感谢你使用 GStackScrollView！希望它能帮助你轻松实现嵌套滚动效果。如果你喜欢这个项目，请给我们一个 star！✨
 
-![GStackScrollView 示例](https://github.com/GIKICoder/GStackScrollView/tree/main/Example)
