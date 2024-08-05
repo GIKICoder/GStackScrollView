@@ -13,6 +13,12 @@
 		2B6944082C60AC6F00202769 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2B6944072C60AC6F00202769 /* Media.xcassets */; };
 		2B69440C2C60ACDD00202769 /* DouyinProfileHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B69440B2C60ACDD00202769 /* DouyinProfileHeaderView.m */; };
 		2B69440F2C60B3CA00202769 /* DouyinFeedListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B69440E2C60B3CA00202769 /* DouyinFeedListController.m */; };
+		2B69444E2C60CD6E00202769 /* DouyinMyProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B69444D2C60CD6E00202769 /* DouyinMyProfileViewController.m */; };
+		2B6944622C60CDBF00202769 /* GBasePagerMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B6944522C60CDBF00202769 /* GBasePagerMenu.m */; };
+		2B6944632C60CDBF00202769 /* GPagerMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B6944542C60CDBF00202769 /* GPagerMenu.m */; };
+		2B6944642C60CDBF00202769 /* GBaseScrollPager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B6944582C60CDBF00202769 /* GBaseScrollPager.m */; };
+		2B6944652C60CDBF00202769 /* GControllerScrollPager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B69445A2C60CDBF00202769 /* GControllerScrollPager.m */; };
+		2B6944662C60CDBF00202769 /* GViewScrollPager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B69445C2C60CDBF00202769 /* GViewScrollPager.m */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
 		6003F592195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
@@ -52,6 +58,19 @@
 		2B69440B2C60ACDD00202769 /* DouyinProfileHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DouyinProfileHeaderView.m; sourceTree = "<group>"; };
 		2B69440D2C60B3CA00202769 /* DouyinFeedListController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DouyinFeedListController.h; sourceTree = "<group>"; };
 		2B69440E2C60B3CA00202769 /* DouyinFeedListController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DouyinFeedListController.m; sourceTree = "<group>"; };
+		2B69444C2C60CD6E00202769 /* DouyinMyProfileViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DouyinMyProfileViewController.h; sourceTree = "<group>"; };
+		2B69444D2C60CD6E00202769 /* DouyinMyProfileViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DouyinMyProfileViewController.m; sourceTree = "<group>"; };
+		2B6944512C60CDBF00202769 /* GBasePagerMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GBasePagerMenu.h; sourceTree = "<group>"; };
+		2B6944522C60CDBF00202769 /* GBasePagerMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GBasePagerMenu.m; sourceTree = "<group>"; };
+		2B6944532C60CDBF00202769 /* GPagerMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPagerMenu.h; sourceTree = "<group>"; };
+		2B6944542C60CDBF00202769 /* GPagerMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GPagerMenu.m; sourceTree = "<group>"; };
+		2B6944552C60CDBF00202769 /* GPagerMenuInternal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPagerMenuInternal.h; sourceTree = "<group>"; };
+		2B6944572C60CDBF00202769 /* GBaseScrollPager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GBaseScrollPager.h; sourceTree = "<group>"; };
+		2B6944582C60CDBF00202769 /* GBaseScrollPager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GBaseScrollPager.m; sourceTree = "<group>"; };
+		2B6944592C60CDBF00202769 /* GControllerScrollPager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GControllerScrollPager.h; sourceTree = "<group>"; };
+		2B69445A2C60CDBF00202769 /* GControllerScrollPager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GControllerScrollPager.m; sourceTree = "<group>"; };
+		2B69445B2C60CDBF00202769 /* GViewScrollPager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GViewScrollPager.h; sourceTree = "<group>"; };
+		2B69445C2C60CDBF00202769 /* GViewScrollPager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GViewScrollPager.m; sourceTree = "<group>"; };
 		3766D4BF72107ECC0635D269 /* Pods_GStackScrollView_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GStackScrollView_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B7834C84BC6D76527233E84 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		4B7FF19BB3F6FFC866A3A860 /* Pods-GStackScrollView_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GStackScrollView_Example.debug.xcconfig"; path = "Target Support Files/Pods-GStackScrollView_Example/Pods-GStackScrollView_Example.debug.xcconfig"; sourceTree = "<group>"; };
@@ -114,6 +133,8 @@
 			children = (
 				2B6944042C60AA4300202769 /* DouyinProfileViewController.h */,
 				2B6944052C60AA4300202769 /* DouyinProfileViewController.m */,
+				2B69444C2C60CD6E00202769 /* DouyinMyProfileViewController.h */,
+				2B69444D2C60CD6E00202769 /* DouyinMyProfileViewController.m */,
 				2B69440D2C60B3CA00202769 /* DouyinFeedListController.h */,
 				2B69440E2C60B3CA00202769 /* DouyinFeedListController.m */,
 				2B6944092C60ACB800202769 /* Views */,
@@ -128,6 +149,56 @@
 				2B69440B2C60ACDD00202769 /* DouyinProfileHeaderView.m */,
 			);
 			name = Views;
+			sourceTree = "<group>";
+		};
+		2B6944502C60CDBF00202769 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
+		2B6944562C60CDBF00202769 /* PagerMenu */ = {
+			isa = PBXGroup;
+			children = (
+				2B6944512C60CDBF00202769 /* GBasePagerMenu.h */,
+				2B6944522C60CDBF00202769 /* GBasePagerMenu.m */,
+				2B6944532C60CDBF00202769 /* GPagerMenu.h */,
+				2B6944542C60CDBF00202769 /* GPagerMenu.m */,
+				2B6944552C60CDBF00202769 /* GPagerMenuInternal.h */,
+			);
+			path = PagerMenu;
+			sourceTree = "<group>";
+		};
+		2B69445D2C60CDBF00202769 /* PagerScroll */ = {
+			isa = PBXGroup;
+			children = (
+				2B6944572C60CDBF00202769 /* GBaseScrollPager.h */,
+				2B6944582C60CDBF00202769 /* GBaseScrollPager.m */,
+				2B6944592C60CDBF00202769 /* GControllerScrollPager.h */,
+				2B69445A2C60CDBF00202769 /* GControllerScrollPager.m */,
+				2B69445B2C60CDBF00202769 /* GViewScrollPager.h */,
+				2B69445C2C60CDBF00202769 /* GViewScrollPager.m */,
+			);
+			path = PagerScroll;
+			sourceTree = "<group>";
+		};
+		2B69445F2C60CDBF00202769 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				2B6944562C60CDBF00202769 /* PagerMenu */,
+				2B69445D2C60CDBF00202769 /* PagerScroll */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		2B6944602C60CDBF00202769 /* GPagerKit */ = {
+			isa = PBXGroup;
+			children = (
+				2B6944502C60CDBF00202769 /* Assets */,
+				2B69445F2C60CDBF00202769 /* Classes */,
+			);
+			path = GPagerKit;
 			sourceTree = "<group>";
 		};
 		6003F581195388D10070C39A = {
@@ -167,6 +238,7 @@
 		6003F593195388D20070C39A /* Example for GStackScrollView */ = {
 			isa = PBXGroup;
 			children = (
+				2B6944602C60CDBF00202769 /* GPagerKit */,
 				6003F59C195388D20070C39A /* GAppDelegate.h */,
 				6003F59D195388D20070C39A /* GAppDelegate.m */,
 				873B8AEA1B1F5CCA007FD442 /* Main.storyboard */,
@@ -408,13 +480,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2B6944652C60CDBF00202769 /* GControllerScrollPager.m in Sources */,
+				2B69444E2C60CD6E00202769 /* DouyinMyProfileViewController.m in Sources */,
 				2B6944022C6081EC00202769 /* ConfigItem.m in Sources */,
 				2B69440C2C60ACDD00202769 /* DouyinProfileHeaderView.m in Sources */,
+				2B6944622C60CDBF00202769 /* GBasePagerMenu.m in Sources */,
+				2B6944632C60CDBF00202769 /* GPagerMenu.m in Sources */,
 				2B6944062C60AA4300202769 /* DouyinProfileViewController.m in Sources */,
 				2B69440F2C60B3CA00202769 /* DouyinFeedListController.m in Sources */,
 				6003F59E195388D20070C39A /* GAppDelegate.m in Sources */,
+				2B6944642C60CDBF00202769 /* GBaseScrollPager.m in Sources */,
 				6003F5A7195388D20070C39A /* GViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
+				2B6944662C60CDBF00202769 /* GViewScrollPager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

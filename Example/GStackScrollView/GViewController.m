@@ -9,7 +9,7 @@
 #import "GViewController.h"
 #import "ConfigItem.h"
 #import "DouyinProfileViewController.h"
-
+#import "DouyinMyProfileViewController.h"
 @interface GViewController ()<UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) UITableView *tableView;
@@ -42,17 +42,15 @@
 - (void)setupConfigItems {
     __weak typeof(self) weakSelf = self;
     self.configItems = @[
-        [[ConfigItem alloc] initWithTitle:@"Douyin" action:^{
+        [[ConfigItem alloc] initWithTitle:@"Douyin-Other Profile" action:^{
             DouyinProfileViewController *vc = [DouyinProfileViewController new];
             [weakSelf.navigationController pushViewController:vc animated:YES];
         }],
-        [[ConfigItem alloc] initWithTitle:@"Douyin-Other Profile" action:^{
+        [[ConfigItem alloc] initWithTitle:@"Douyin-My Profile" action:^{
             
+            DouyinMyProfileViewController *vc = [DouyinMyProfileViewController new];
+            [weakSelf.navigationController pushViewController:vc animated:YES];
         }],
-        [[ConfigItem alloc] initWithTitle:@"Twitter" action:^{
-            
-        }],
-        
     ];
 }
 

@@ -5,6 +5,7 @@ platform :ios, '12.0'
 target 'GStackScrollView_Example' do
   pod 'GStackScrollView', :path => '../'
   pod 'Masonry'
+  pod 'GPagerKit'
   target 'GStackScrollView_Tests' do
     inherit! :search_paths
   end

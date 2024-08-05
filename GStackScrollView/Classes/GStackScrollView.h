@@ -64,6 +64,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (CGFloat)g_stackHoverHeight;
 
 /// 需要添加到StackView上的containerView
+/// 如果Container是UIView的子类. 不指定AttatchView会默认将Container 添加到StackScrollView
 - (UIView *)g_stackAttatchViewWithContainer:(id)container;
 
 /// 可以通过delegate 回调 返回当前container 需要处理事件监听的ScrollView
