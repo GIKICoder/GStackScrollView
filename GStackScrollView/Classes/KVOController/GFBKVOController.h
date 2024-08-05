@@ -15,48 +15,48 @@
 
  For example:
 
- FBKVOKeyPath(string.length) => @"length"
+ GFBKVOKeyPath(string.length) => @"length"
 
  Or even the complex case:
 
- FBKVOKeyPath(string.lowercaseString.length) => @"lowercaseString.length".
+ GFBKVOKeyPath(string.lowercaseString.length) => @"lowercaseString.length".
  */
-#define FBKVOKeyPath(KEYPATH) \
+#define GFBKVOKeyPath(KEYPATH) \
 @(((void)(NO && ((void)KEYPATH, NO)), \
-({ const char *fbkvokeypath = strchr(#KEYPATH, '.'); NSCAssert(fbkvokeypath, @"Provided key path is invalid."); fbkvokeypath + 1; })))
-
+({ const char *GFBKVOkeypath = strchr(#KEYPATH, '.'); NSCAssert(GFBKVOkeypath, @"Provided key path is invalid."); GFBKVOkeypath + 1; })))
+ 
 /**
  This macro ensures that key path exists at compile time.
  Given a receiver type and a key path, it verifies at compile time that the key path exists, without calling it.
 
  For example:
 
- FBKVOClassKeyPath(NSString, length) => @"length"
- FBKVOClassKeyPath(NSString, lowercaseString.length) => @"lowercaseString.length"
+ GFBKVOClassKeyPath(NSString, length) => @"length"
+ GFBKVOClassKeyPath(NSString, lowercaseString.length) => @"lowercaseString.length"
  */
-#define FBKVOClassKeyPath(CLASS, KEYPATH) \
+#define GFBKVOClassKeyPath(CLASS, KEYPATH) \
 @(((void)(NO && ((void)((CLASS *)(nil)).KEYPATH, NO)), #KEYPATH))
 
 NS_ASSUME_NONNULL_BEGIN
 
 /**
- Key provided in the @c change dictionary of @c FBKVONotificationBlock that's value represents the key-path being observed
+ Key provided in the @c change dictionary of @c GFBKVONotificationBlock that's value represents the key-path being observed
  */
-extern NSString *const FBKVONotificationKeyPathKey;
+extern NSString *const GFBKVONotificationKeyPathKey;
 
 /**
  @abstract Block called on key-value change notification.
  @param observer The observer of the change.
  @param object The object changed.
- @param change The change dictionary which also includes @c FBKVONotificationKeyPathKey
+ @param change The change dictionary which also includes @c GFBKVONotificationKeyPathKey
  */
-typedef void (^FBKVONotificationBlock)(id _Nullable observer, id object, NSDictionary<NSString *, id> *change);
+typedef void (^GFBKVONotificationBlock)(id _Nullable observer, id object, NSDictionary<NSString *, id> *change);
 
 /**
- @abstract FBKVOController makes Key-Value Observing simpler and safer.
- @discussion FBKVOController adds support for handling key-value changes with blocks and custom actions, as well as the NSKeyValueObserving callback. Notification will never message a deallocated observer. Observer removal never throws exceptions, and observers are removed implicitly on controller deallocation. FBKVOController is also thread safe. When used in a concurrent environment, it protects observers from possible resurrection and avoids ensuing crash. By default, the controller maintains a strong reference to objects observed.
+ @abstract GFBKVOController makes Key-Value Observing simpler and safer.
+ @discussion GFBKVOController adds support for handling key-value changes with blocks and custom actions, as well as the NSKeyValueObserving callback. Notification will never message a deallocated observer. Observer removal never throws exceptions, and observers are removed implicitly on controller deallocation. GFBKVOController is also thread safe. When used in a concurrent environment, it protects observers from possible resurrection and avoids ensuing crash. By default, the controller maintains a strong reference to objects observed.
  */
-@interface FBKVOController : NSObject
+@interface GFBKVOController : NSObject
 
 ///--------------------------------------
 #pragma mark - Initialize
@@ -117,7 +117,7 @@ typedef void (^FBKVONotificationBlock)(id _Nullable observer, id object, NSDicti
  @param block The block to execute on notification.
  @discussion On key-value change, the specified block is called. In order to avoid retain loops, the block must avoid referencing the KVO controller or an owner thereof. Observing an already observed object key path or nil results in no operation.
  */
-- (void)observe:(nullable id)object keyPath:(NSString *)keyPath options:(NSKeyValueObservingOptions)options block:(FBKVONotificationBlock)block;
+- (void)observe:(nullable id)object keyPath:(NSString *)keyPath options:(NSKeyValueObservingOptions)options block:(GFBKVONotificationBlock)block;
 
 /**
  @abstract Registers observer for key-value change notification.
@@ -148,7 +148,7 @@ typedef void (^FBKVONotificationBlock)(id _Nullable observer, id object, NSDicti
  @param block The block to execute on notification.
  @discussion On key-value change, the specified block is called. Inorder to avoid retain loops, the block must avoid referencing the KVO controller or an owner thereof. Observing an already observed object key path or nil results in no operation.
  */
-- (void)observe:(nullable id)object keyPaths:(NSArray<NSString *> *)keyPaths options:(NSKeyValueObservingOptions)options block:(FBKVONotificationBlock)block;
+- (void)observe:(nullable id)object keyPaths:(NSArray<NSString *> *)keyPaths options:(NSKeyValueObservingOptions)options block:(GFBKVONotificationBlock)block;
 
 /**
  @abstract Registers observer for key-value change notification.

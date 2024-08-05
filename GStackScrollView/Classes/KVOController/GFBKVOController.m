@@ -7,7 +7,7 @@
  of patent rights can be found in the PATENTS file in the same directory.
  */
 
-#import "FBKVOController.h"
+#import "GFBKVOController.h"
 
 #import <objc/message.h>
 #import <pthread/pthread.h>
@@ -80,44 +80,44 @@ static NSString *describe_options(NSKeyValueObservingOptions options)
   return s;
 }
 
-#pragma mark _FBKVOInfo -
+#pragma mark _GFBKVOInfo -
 
-typedef NS_ENUM(uint8_t, _FBKVOInfoState) {
-  _FBKVOInfoStateInitial = 0,
+typedef NS_ENUM(uint8_t, _GFBKVOInfoState) {
+  _GFBKVOInfoStateInitial = 0,
 
   // whether the observer registration in Foundation has completed
-  _FBKVOInfoStateObserving,
+  _GFBKVOInfoStateObserving,
 
   // whether `unobserve` was called before observer registration in Foundation has completed
   // this could happen when `NSKeyValueObservingOptionInitial` is one of the NSKeyValueObservingOptions
-  _FBKVOInfoStateNotObserving,
+  _GFBKVOInfoStateNotObserving,
 };
 
-NSString *const FBKVONotificationKeyPathKey = @"FBKVONotificationKeyPathKey";
+NSString *const GFBKVONotificationKeyPathKey = @"GFBKVONotificationKeyPathKey";
 
 /**
  @abstract The key-value observation info.
  @discussion Object equality is only used within the scope of a controller instance. Safely omit controller from equality definition.
  */
-@interface _FBKVOInfo : NSObject
+@interface _GFBKVOInfo : NSObject
 @end
 
-@implementation _FBKVOInfo
+@implementation _GFBKVOInfo
 {
 @public
-  __weak FBKVOController *_controller;
+  __weak GFBKVOController *_controller;
   NSString *_keyPath;
   NSKeyValueObservingOptions _options;
   SEL _action;
   void *_context;
-  FBKVONotificationBlock _block;
-  _FBKVOInfoState _state;
+  GFBKVONotificationBlock _block;
+  _GFBKVOInfoState _state;
 }
 
-- (instancetype)initWithController:(FBKVOController *)controller
+- (instancetype)initWithController:(GFBKVOController *)controller
                            keyPath:(NSString *)keyPath
                            options:(NSKeyValueObservingOptions)options
-                             block:(nullable FBKVONotificationBlock)block
+                             block:(nullable GFBKVONotificationBlock)block
                             action:(nullable SEL)action
                            context:(nullable void *)context
 {
@@ -133,22 +133,22 @@ NSString *const FBKVONotificationKeyPathKey = @"FBKVONotificationKeyPathKey";
   return self;
 }
 
-- (instancetype)initWithController:(FBKVOController *)controller keyPath:(NSString *)keyPath options:(NSKeyValueObservingOptions)options block:(FBKVONotificationBlock)block
+- (instancetype)initWithController:(GFBKVOController *)controller keyPath:(NSString *)keyPath options:(NSKeyValueObservingOptions)options block:(GFBKVONotificationBlock)block
 {
   return [self initWithController:controller keyPath:keyPath options:options block:block action:NULL context:NULL];
 }
 
-- (instancetype)initWithController:(FBKVOController *)controller keyPath:(NSString *)keyPath options:(NSKeyValueObservingOptions)options action:(SEL)action
+- (instancetype)initWithController:(GFBKVOController *)controller keyPath:(NSString *)keyPath options:(NSKeyValueObservingOptions)options action:(SEL)action
 {
   return [self initWithController:controller keyPath:keyPath options:options block:NULL action:action context:NULL];
 }
 
-- (instancetype)initWithController:(FBKVOController *)controller keyPath:(NSString *)keyPath options:(NSKeyValueObservingOptions)options context:(void *)context
+- (instancetype)initWithController:(GFBKVOController *)controller keyPath:(NSString *)keyPath options:(NSKeyValueObservingOptions)options context:(void *)context
 {
   return [self initWithController:controller keyPath:keyPath options:options block:NULL action:NULL context:context];
 }
 
-- (instancetype)initWithController:(FBKVOController *)controller keyPath:(NSString *)keyPath
+- (instancetype)initWithController:(GFBKVOController *)controller keyPath:(NSString *)keyPath
 {
   return [self initWithController:controller keyPath:keyPath options:0 block:NULL action:NULL context:NULL];
 }
@@ -169,7 +169,7 @@ NSString *const FBKVONotificationKeyPathKey = @"FBKVONotificationKeyPathKey";
   if (![object isKindOfClass:[self class]]) {
     return NO;
   }
-  return [_keyPath isEqualToString:((_FBKVOInfo *)object)->_keyPath];
+  return [_keyPath isEqualToString:((_GFBKVOInfo *)object)->_keyPath];
 }
 
 - (NSString *)debugDescription
@@ -193,40 +193,40 @@ NSString *const FBKVONotificationKeyPathKey = @"FBKVONotificationKeyPathKey";
 
 @end
 
-#pragma mark _FBKVOSharedController -
+#pragma mark _GFBKVOSharedController -
 
 /**
  @abstract The shared KVO controller instance.
  @discussion Acts as a receptionist, receiving and forwarding KVO notifications.
  */
-@interface _FBKVOSharedController : NSObject
+@interface _GFBKVOSharedController : NSObject
 
 /** A shared instance that never deallocates. */
 + (instancetype)sharedController;
 
 /** observe an object, info pair */
-- (void)observe:(id)object info:(nullable _FBKVOInfo *)info;
+- (void)observe:(id)object info:(nullable _GFBKVOInfo *)info;
 
 /** unobserve an object, info pair */
-- (void)unobserve:(id)object info:(nullable _FBKVOInfo *)info;
+- (void)unobserve:(id)object info:(nullable _GFBKVOInfo *)info;
 
 /** unobserve an object with a set of infos */
 - (void)unobserve:(id)object infos:(nullable NSSet *)infos;
 
 @end
 
-@implementation _FBKVOSharedController
+@implementation _GFBKVOSharedController
 {
-  NSHashTable<_FBKVOInfo *> *_infos;
+  NSHashTable<_GFBKVOInfo *> *_infos;
   pthread_mutex_t _mutex;
 }
 
 + (instancetype)sharedController
 {
-  static _FBKVOSharedController *_controller = nil;
+  static _GFBKVOSharedController *_controller = nil;
   static dispatch_once_t onceToken;
   dispatch_once(&onceToken, ^{
-    _controller = [[_FBKVOSharedController alloc] init];
+    _controller = [[_GFBKVOSharedController alloc] init];
   });
   return _controller;
 }
@@ -268,7 +268,7 @@ NSString *const FBKVONotificationKeyPathKey = @"FBKVONotificationKeyPathKey";
   pthread_mutex_lock(&_mutex);
 
   NSMutableArray *infoDescriptions = [NSMutableArray arrayWithCapacity:_infos.count];
-  for (_FBKVOInfo *info in _infos) {
+  for (_GFBKVOInfo *info in _infos) {
     [infoDescriptions addObject:info.debugDescription];
   }
 
@@ -281,7 +281,7 @@ NSString *const FBKVONotificationKeyPathKey = @"FBKVONotificationKeyPathKey";
   return s;
 }
 
-- (void)observe:(id)object info:(nullable _FBKVOInfo *)info
+- (void)observe:(id)object info:(nullable _GFBKVOInfo *)info
 {
   if (nil == info) {
     return;
@@ -295,9 +295,9 @@ NSString *const FBKVONotificationKeyPathKey = @"FBKVONotificationKeyPathKey";
   // add observer
   [object addObserver:self forKeyPath:info->_keyPath options:info->_options context:(void *)info];
 
-  if (info->_state == _FBKVOInfoStateInitial) {
-    info->_state = _FBKVOInfoStateObserving;
-  } else if (info->_state == _FBKVOInfoStateNotObserving) {
+  if (info->_state == _GFBKVOInfoStateInitial) {
+    info->_state = _GFBKVOInfoStateObserving;
+  } else if (info->_state == _GFBKVOInfoStateNotObserving) {
     // this could happen when `NSKeyValueObservingOptionInitial` is one of the NSKeyValueObservingOptions,
     // and the observer is unregistered within the callback block.
     // at this time the object has been registered as an observer (in Foundation KVO),
@@ -306,7 +306,7 @@ NSString *const FBKVONotificationKeyPathKey = @"FBKVONotificationKeyPathKey";
   }
 }
 
-- (void)unobserve:(id)object info:(nullable _FBKVOInfo *)info
+- (void)unobserve:(id)object info:(nullable _GFBKVOInfo *)info
 {
   if (nil == info) {
     return;
@@ -318,13 +318,13 @@ NSString *const FBKVONotificationKeyPathKey = @"FBKVONotificationKeyPathKey";
   pthread_mutex_unlock(&_mutex);
 
   // remove observer
-  if (info->_state == _FBKVOInfoStateObserving) {
+  if (info->_state == _GFBKVOInfoStateObserving) {
     [object removeObserver:self forKeyPath:info->_keyPath context:(void *)info];
   }
-  info->_state = _FBKVOInfoStateNotObserving;
+  info->_state = _GFBKVOInfoStateNotObserving;
 }
 
-- (void)unobserve:(id)object infos:(nullable NSSet<_FBKVOInfo *> *)infos
+- (void)unobserve:(id)object infos:(nullable NSSet<_GFBKVOInfo *> *)infos
 {
   if (0 == infos.count) {
     return;
@@ -332,17 +332,17 @@ NSString *const FBKVONotificationKeyPathKey = @"FBKVONotificationKeyPathKey";
 
   // unregister info
   pthread_mutex_lock(&_mutex);
-  for (_FBKVOInfo *info in infos) {
+  for (_GFBKVOInfo *info in infos) {
     [_infos removeObject:info];
   }
   pthread_mutex_unlock(&_mutex);
 
   // remove observer
-  for (_FBKVOInfo *info in infos) {
-    if (info->_state == _FBKVOInfoStateObserving) {
+  for (_GFBKVOInfo *info in infos) {
+    if (info->_state == _GFBKVOInfoStateObserving) {
       [object removeObserver:self forKeyPath:info->_keyPath context:(void *)info];
     }
-    info->_state = _FBKVOInfoStateNotObserving;
+    info->_state = _GFBKVOInfoStateNotObserving;
   }
 }
 
@@ -353,7 +353,7 @@ NSString *const FBKVONotificationKeyPathKey = @"FBKVONotificationKeyPathKey";
 {
   NSAssert(context, @"missing context keyPath:%@ object:%@ change:%@", keyPath, object, change);
 
-  _FBKVOInfo *info;
+  _GFBKVOInfo *info;
 
   {
     // lookup context in registered infos, taking out a strong reference only if it exists
@@ -365,7 +365,7 @@ NSString *const FBKVONotificationKeyPathKey = @"FBKVONotificationKeyPathKey";
   if (nil != info) {
 
     // take strong reference to controller
-    FBKVOController *controller = info->_controller;
+    GFBKVOController *controller = info->_controller;
     if (nil != controller) {
 
       // take strong reference to observer
@@ -377,7 +377,7 @@ NSString *const FBKVONotificationKeyPathKey = @"FBKVONotificationKeyPathKey";
           NSDictionary<NSString *, id> *changeWithKeyPath = change;
           // add the keyPath to the change dictionary for clarity when mulitple keyPaths are being observed
           if (keyPath) {
-            NSMutableDictionary<NSString *, id> *mChange = [NSMutableDictionary dictionaryWithObject:keyPath forKey:FBKVONotificationKeyPathKey];
+            NSMutableDictionary<NSString *, id> *mChange = [NSMutableDictionary dictionaryWithObject:keyPath forKey:GFBKVONotificationKeyPathKey];
             [mChange addEntriesFromDictionary:change];
             changeWithKeyPath = [mChange copy];
           }
@@ -397,11 +397,11 @@ NSString *const FBKVONotificationKeyPathKey = @"FBKVONotificationKeyPathKey";
 
 @end
 
-#pragma mark FBKVOController -
+#pragma mark GFBKVOController -
 
-@implementation FBKVOController
+@implementation GFBKVOController
 {
-  NSMapTable<id, NSMutableSet<_FBKVOInfo *> *> *_objectInfosMap;
+  NSMapTable<id, NSMutableSet<_GFBKVOInfo *> *> *_objectInfosMap;
   pthread_mutex_t _lock;
 }
 
@@ -452,7 +452,7 @@ NSString *const FBKVONotificationKeyPathKey = @"FBKVONotificationKeyPathKey";
   for (id object in _objectInfosMap) {
     NSMutableSet *infos = [_objectInfosMap objectForKey:object];
     NSMutableArray *infoDescriptions = [NSMutableArray arrayWithCapacity:infos.count];
-    [infos enumerateObjectsUsingBlock:^(_FBKVOInfo *info, BOOL *stop) {
+    [infos enumerateObjectsUsingBlock:^(_GFBKVOInfo *info, BOOL *stop) {
       [infoDescriptions addObject:info.debugDescription];
     }];
     [s appendFormat:@"%@ -> %@", object, infoDescriptions];
@@ -467,7 +467,7 @@ NSString *const FBKVONotificationKeyPathKey = @"FBKVONotificationKeyPathKey";
 
 #pragma mark Utilities -
 
-- (void)_observe:(id)object info:(_FBKVOInfo *)info
+- (void)_observe:(id)object info:(_GFBKVOInfo *)info
 {
   // lock
   pthread_mutex_lock(&_lock);
@@ -475,7 +475,7 @@ NSString *const FBKVONotificationKeyPathKey = @"FBKVONotificationKeyPathKey";
   NSMutableSet *infos = [_objectInfosMap objectForKey:object];
 
   // check for info existence
-  _FBKVOInfo *existingInfo = [infos member:info];
+  _GFBKVOInfo *existingInfo = [infos member:info];
   if (nil != existingInfo) {
     // observation info already exists; do not observe it again
 
@@ -496,10 +496,10 @@ NSString *const FBKVONotificationKeyPathKey = @"FBKVONotificationKeyPathKey";
   // unlock prior to callout
   pthread_mutex_unlock(&_lock);
 
-  [[_FBKVOSharedController sharedController] observe:object info:info];
+  [[_GFBKVOSharedController sharedController] observe:object info:info];
 }
 
-- (void)_unobserve:(id)object info:(_FBKVOInfo *)info
+- (void)_unobserve:(id)object info:(_GFBKVOInfo *)info
 {
   // lock
   pthread_mutex_lock(&_lock);
@@ -508,7 +508,7 @@ NSString *const FBKVONotificationKeyPathKey = @"FBKVONotificationKeyPathKey";
   NSMutableSet *infos = [_objectInfosMap objectForKey:object];
 
   // lookup registered info instance
-  _FBKVOInfo *registeredInfo = [infos member:info];
+  _GFBKVOInfo *registeredInfo = [infos member:info];
 
   if (nil != registeredInfo) {
     [infos removeObject:registeredInfo];
@@ -523,7 +523,7 @@ NSString *const FBKVONotificationKeyPathKey = @"FBKVONotificationKeyPathKey";
   pthread_mutex_unlock(&_lock);
 
   // unobserve
-  [[_FBKVOSharedController sharedController] unobserve:object info:registeredInfo];
+  [[_GFBKVOSharedController sharedController] unobserve:object info:registeredInfo];
 }
 
 - (void)_unobserve:(id)object
@@ -540,7 +540,7 @@ NSString *const FBKVONotificationKeyPathKey = @"FBKVONotificationKeyPathKey";
   pthread_mutex_unlock(&_lock);
 
   // unobserve
-  [[_FBKVOSharedController sharedController] unobserve:object infos:infos];
+  [[_GFBKVOSharedController sharedController] unobserve:object infos:infos];
 }
 
 - (void)_unobserveAll
@@ -556,7 +556,7 @@ NSString *const FBKVONotificationKeyPathKey = @"FBKVONotificationKeyPathKey";
   // unlock
   pthread_mutex_unlock(&_lock);
 
-  _FBKVOSharedController *shareController = [_FBKVOSharedController sharedController];
+  _GFBKVOSharedController *shareController = [_GFBKVOSharedController sharedController];
 
   for (id object in objectInfoMaps) {
     // unobserve each registered object and infos
@@ -567,7 +567,7 @@ NSString *const FBKVONotificationKeyPathKey = @"FBKVONotificationKeyPathKey";
 
 #pragma mark API -
 
-- (void)observe:(nullable id)object keyPath:(NSString *)keyPath options:(NSKeyValueObservingOptions)options block:(FBKVONotificationBlock)block
+- (void)observe:(nullable id)object keyPath:(NSString *)keyPath options:(NSKeyValueObservingOptions)options block:(GFBKVONotificationBlock)block
 {
   NSAssert(0 != keyPath.length && NULL != block, @"missing required parameters observe:%@ keyPath:%@ block:%p", object, keyPath, block);
   if (nil == object || 0 == keyPath.length || NULL == block) {
@@ -575,14 +575,14 @@ NSString *const FBKVONotificationKeyPathKey = @"FBKVONotificationKeyPathKey";
   }
 
   // create info
-  _FBKVOInfo *info = [[_FBKVOInfo alloc] initWithController:self keyPath:keyPath options:options block:block];
+  _GFBKVOInfo *info = [[_GFBKVOInfo alloc] initWithController:self keyPath:keyPath options:options block:block];
 
   // observe object with info
   [self _observe:object info:info];
 }
 
 
-- (void)observe:(nullable id)object keyPaths:(NSArray<NSString *> *)keyPaths options:(NSKeyValueObservingOptions)options block:(FBKVONotificationBlock)block
+- (void)observe:(nullable id)object keyPaths:(NSArray<NSString *> *)keyPaths options:(NSKeyValueObservingOptions)options block:(GFBKVONotificationBlock)block
 {
   NSAssert(0 != keyPaths.count && NULL != block, @"missing required parameters observe:%@ keyPath:%@ block:%p", object, keyPaths, block);
   if (nil == object || 0 == keyPaths.count || NULL == block) {
@@ -603,7 +603,7 @@ NSString *const FBKVONotificationKeyPathKey = @"FBKVONotificationKeyPathKey";
   }
 
   // create info
-  _FBKVOInfo *info = [[_FBKVOInfo alloc] initWithController:self keyPath:keyPath options:options action:action];
+  _GFBKVOInfo *info = [[_GFBKVOInfo alloc] initWithController:self keyPath:keyPath options:options action:action];
 
   // observe object with info
   [self _observe:object info:info];
@@ -630,7 +630,7 @@ NSString *const FBKVONotificationKeyPathKey = @"FBKVONotificationKeyPathKey";
   }
 
   // create info
-  _FBKVOInfo *info = [[_FBKVOInfo alloc] initWithController:self keyPath:keyPath options:options context:context];
+  _GFBKVOInfo *info = [[_GFBKVOInfo alloc] initWithController:self keyPath:keyPath options:options context:context];
 
   // observe object with info
   [self _observe:object info:info];
@@ -651,7 +651,7 @@ NSString *const FBKVONotificationKeyPathKey = @"FBKVONotificationKeyPathKey";
 - (void)unobserve:(nullable id)object keyPath:(NSString *)keyPath
 {
   // create representative info
-  _FBKVOInfo *info = [[_FBKVOInfo alloc] initWithController:self keyPath:keyPath];
+  _GFBKVOInfo *info = [[_GFBKVOInfo alloc] initWithController:self keyPath:keyPath];
 
   // unobserve object property
   [self _unobserve:object info:info];

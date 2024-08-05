@@ -7,7 +7,7 @@
  of patent rights can be found in the PATENTS file in the same directory.
  */
 
-#import "NSObject+FBKVOController.h"
+#import "NSObject+GFBKVOController.h"
 
 #import <objc/message.h>
 
@@ -22,39 +22,39 @@ NS_ASSUME_NONNULL_BEGIN
 static void *NSObjectKVOControllerKey = &NSObjectKVOControllerKey;
 static void *NSObjectKVOControllerNonRetainingKey = &NSObjectKVOControllerNonRetainingKey;
 
-@implementation NSObject (FBKVOController)
+@implementation NSObject (GFBKVOController)
 
-- (FBKVOController *)KVOController
+- (GFBKVOController *)KVOController
 {
   id controller = objc_getAssociatedObject(self, NSObjectKVOControllerKey);
   
   // lazily create the KVOController
   if (nil == controller) {
-    controller = [FBKVOController controllerWithObserver:self];
+    controller = [GFBKVOController controllerWithObserver:self];
     self.KVOController = controller;
   }
   
   return controller;
 }
 
-- (void)setKVOController:(FBKVOController *)KVOController
+- (void)setKVOController:(GFBKVOController *)KVOController
 {
   objc_setAssociatedObject(self, NSObjectKVOControllerKey, KVOController, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
-- (FBKVOController *)KVOControllerNonRetaining
+- (GFBKVOController *)KVOControllerNonRetaining
 {
   id controller = objc_getAssociatedObject(self, NSObjectKVOControllerNonRetainingKey);
   
   if (nil == controller) {
-    controller = [[FBKVOController alloc] initWithObserver:self retainObserved:NO];
+    controller = [[GFBKVOController alloc] initWithObserver:self retainObserved:NO];
     self.KVOControllerNonRetaining = controller;
   }
   
   return controller;
 }
 
-- (void)setKVOControllerNonRetaining:(FBKVOController *)KVOControllerNonRetaining
+- (void)setKVOControllerNonRetaining:(GFBKVOController *)KVOControllerNonRetaining
 {
   objc_setAssociatedObject(self, NSObjectKVOControllerNonRetainingKey, KVOControllerNonRetaining, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }

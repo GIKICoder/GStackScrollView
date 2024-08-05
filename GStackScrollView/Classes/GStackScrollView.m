@@ -6,7 +6,7 @@
 //
 
 #import "GStackScrollView.h"
-#import "KVOController.h"
+#import "NSObject+GFBKVOController.h"
 
 @interface GStackScrollView ()<UIScrollViewDelegate>
 @property (nonatomic, strong) NSPointerArray * containers;
@@ -463,7 +463,7 @@
     UIView * attachView = [self __fetchAttachViewWithContainer:container];
     if (attachView) {
         /// observe attachView frame update stackview contentsize
-        [self.KVOController observe:attachView keyPaths:@[FBKVOKeyPath(attachView.frame), FBKVOKeyPath(attachView.bounds)] options:options block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSString *,id> * _Nonnull change) {
+        [self.KVOController observe:attachView keyPaths:@[GFBKVOKeyPath(attachView.frame), GFBKVOKeyPath(attachView.bounds)] options:options block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSString *,id> * _Nonnull change) {
             CGRect newRect = CGRectZero;
             CGRect oldRect = CGRectZero;
             id newValue = [change valueForKey:NSKeyValueChangeNewKey];
