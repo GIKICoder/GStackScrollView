@@ -1,0 +1,6 @@
+framework module GStackScrollView {
+  umbrella header "GStackScrollView-umbrella.h"
+
+  export *
+  module * { export * }
+}

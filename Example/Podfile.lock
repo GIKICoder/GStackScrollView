@@ -1,0 +1,27 @@
+PODS:
+  - GStackScrollView (0.1.0):
+    - KVOController
+  - KVOController (1.2.0)
+  - Masonry (1.1.0)
+
+DEPENDENCIES:
+  - GStackScrollView (from `../`)
+  - Masonry
+
+SPEC REPOS:
+  trunk:
+    - KVOController
+    - Masonry
+
+EXTERNAL SOURCES:
+  GStackScrollView:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  GStackScrollView: cca421cbb40b91e047e74558671955784fde5c76
+  KVOController: d72ace34afea42468329623b3379ab3cd1d286b6
+  Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
+
+PODFILE CHECKSUM: 75ea7b28ff2f6f0e52c8ee5c70929848f1be9e74
+
+COCOAPODS: 1.15.2
