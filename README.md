@@ -24,7 +24,7 @@ GStackScrollView 是一个基于Objective-c实现的嵌套滚动处理组件，�
 你可以通过以下方式将 GStackScrollView 安装到你的项目中：
 
 ```
-pod 'GPagerKit'
+pod 'GStackScrollView'
 ```
 
 
